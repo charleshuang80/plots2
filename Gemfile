@@ -15,9 +15,9 @@ group :mysql do
   gem 'mysql2'
 end
 # TODO support postgresql
-#group :postgresql do
-#  gem "activerecord-postgresql-adapter"
-#end
+group :postgresql do
+ gem "activerecord-postgresql-adapter"
+end
 
 # Support composite primary keys
 gem 'composite_primary_keys'
