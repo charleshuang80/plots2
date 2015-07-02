@@ -50,11 +50,14 @@
 </div>
 <div class="span8 blog">
   <div class="blog-header">
-    <h1><%= params[:id] == "blog" ? "The Public Lab Blog" : params[:id].capitalize %></h1>
+    <h1><%= params[:id] == "blog" ? "The Public Lab" : params[:id].split('-').join(' ').capitalize %> Blog</h1>
 
-    <br />
-    <p>stories from the Public Lab community</p>
-    <p><a href="/wiki/blog">About the blog</a></p>
+    <% if params[:id] == "blog" %>
+      <br />
+      <p>stories from the Public Lab community</p>
+      <p><a href="/wiki/blog">About the blog</a></p>
+    <% end %>
+
     <br />
  
     <% if current_user %>
@@ -93,9 +96,10 @@
             | <i style="color:#888;" class="icon icon-star-empty"></i> <%= node.likes %>
             <% end %>
           </small></p>
-          <p><%= raw auto_link(node.latest.render_body.truncate(1200), :sanitize => false) %></p>
+          <p><%= raw auto_link(node.latest.render_body, :sanitize => false) %></p>
           <p><a href="<%= node.path %>">Read more &raquo;</a></p>
           <p>
+            <%= render :partial => "like/like", :locals => {:node => node, :tagnames => node.tags.collect(&:name) } %>
             <% node.tags[0..3].each do |tag| %>
               <a class="label label-info" href="/tag/<%= tag.name %>"><%= tag.name %></a> 
             <% end %>

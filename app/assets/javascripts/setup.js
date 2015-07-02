@@ -105,6 +105,14 @@ jQuery(document).ready(function($) {
       interval: 6000
     })
   }
+
+  // Foldaway code:
+  $('p.foldaway-link').click(function() {
+    var title = $(this).attr('data-title');
+    $('div[data-title="'+title+'"]').animate({height:'toggle'},'slow')
+  })
+
+
 })
 
 function getUrlParameter(sParam)
